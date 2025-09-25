@@ -24,3 +24,11 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+/* globals.css */
+.hero-wallet {
+  background-image: url('/assets/Hero/Wallet.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 615px;
+  height: 455px;
+}
