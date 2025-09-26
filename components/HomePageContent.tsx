@@ -6,6 +6,7 @@ import ShopByCategories from './ShopbyCategories';
 import BestSellerSection from './BestsellerSection';
 
 import CategoryShowcase from './CategoryShowcase';
+import ImageSlider from './ImageSlider';
 
 const HomePageContent: React.FC = () => {
     return (
@@ -14,7 +15,7 @@ const HomePageContent: React.FC = () => {
 
             {/* Hero Section - ALIBI Banner */}
             {/* Hero Section - ALIBI Banner */}
-            <div className="relative w-full h-[500px]">
+            <div className="relative w-full h-[500px] mb-8">
 
                 {/* CORRECTED SRC PATH: /assets/Hero/herobanner.png */}
 
@@ -36,7 +37,9 @@ const HomePageContent: React.FC = () => {
             </div>
 
 
-            <img src="/assets/Hero/image.png" alt="" className='gap-1 top-[510px]' />
+            <div>
+                <ImageSlider/>
+            </div>
 
             <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ">
 
@@ -88,22 +91,7 @@ const HomePageContent: React.FC = () => {
               
 
                 {/* About Us Section (White Box with Text and Image) */}
-                <div className="bg-white text-neutral-900 p-8 md:p-12 flex flex-col md:flex-row gap-8 mb-16">
-                    <div className="w-full md:w-1/3 h-80 bg-neutral-300 flex items-center justify-center text-gray-600 text-base">
-                        About Us Image (Model)
-                    </div>
-                    <div className="w-full md:w-2/3">
-                        <h2 className="text-3xl font-light mb-4">ABOUT ALIBI</h2>
-                        <p className="text-gray-700 leading-relaxed text-sm">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                            <br /><br />
-                            Curabitur pretium tincidunt lacus. Nulla facilisi. Nullam faucibus mi quis velit. Curabitur convallis arcu.
-                        </p>
-                        <button className="mt-6 px-6 py-2 border border-neutral-900 text-neutral-900 hover:bg-neutral-900 hover:text-white transition-colors duration-300">
-                            READ MORE
-                        </button>
-                    </div>
-                </div>
+               
 
             </div> {/* End max-w-7xl div */}
 

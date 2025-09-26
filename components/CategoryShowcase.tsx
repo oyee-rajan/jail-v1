@@ -100,7 +100,7 @@ const CategoryShowcase: React.FC = () => {
         return (
           <div 
             key={section.id} 
-            className="grid grid-cols-1 md:grid-cols-2 min-h-[30rem] border-b border-gray-900 last:border-b-0 mb-11"
+            className="grid grid-cols-1 md:grid-cols-2 min-h-[30rem] mb-16"
           >
            
             <div 
@@ -140,7 +140,7 @@ const CategoryShowcase: React.FC = () => {
       })}
 
       
-      <div className="relative w-full aspect-[2.5/1] overflow-hidden">
+      <div className="relative w-full aspect-[2.5/1] overflow-hidden mb-10">
         <Image
          
           src="/assets/Hero/Rectangle 356.png"
@@ -151,11 +151,11 @@ const CategoryShowcase: React.FC = () => {
         />
       </div>
 
-       <section className="relative w-[1227px] h-[616px] py-16 sm:py-24 md:py-32 left-1">
+       <section className="relative w-[1227px] h-[616px] py-16 sm:py-24 md:py-32 left-1 mb-6 gap-6">
         {/* Background Image Container */}
         <div className="absolute inset-0 z-0">
           <Image
-            // E:\six.ind\Projects\jail\public\assets\Hero\Rectangle 635.png
+           
             src="/assets/Hero/Rectangle 635.png"
             alt="Light textured background"
             layout="fill"
@@ -166,7 +166,7 @@ const CategoryShowcase: React.FC = () => {
         </div>
         
       
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white/5 md:bg-transparent rounded-lg p-6">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white/5 md:bg-transparent rounded-lg p-6 ">
           <h2 className="text-center text-4xl font-normal tracking-widest text-yellow-800 mb-12 uppercase">
             JAIL LUXURY
           </h2>

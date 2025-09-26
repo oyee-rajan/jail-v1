@@ -1,46 +1,150 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import Image from 'next/image';
 
 // --- Data Structures ---
 
-interface ProductDetails {
+interface Product {
   name: string;
   mrp: string;
   colors: string[];
 }
 
-// Data for the fixed products shown at the bottom
-const productLeft: ProductDetails = {
-  name: 'Leather Watch Case',
-  mrp: '₹12,699',
-  colors: ['bg-red-900', 'bg-green-700', 'bg-black'],
+interface ProductCategory {
+  image: string;
+  alt: string;
+  details: Product;
+}
+
+interface CategoryData {
+  categories: ProductCategory[];
+}
+
+// --- Static Hero Data ---
+const menHeroData = {
+  heroImage: '/assets/Hero/Rectangle 634.png',
+  heroAlt: 'Man wearing a black leather backpack in a forest',
+  collection: 'FOR HIM',
 };
 
-const productRight: ProductDetails = {
-  name: 'Steamer Carryon',
-  mrp: '₹31,000',
-  colors: ['bg-red-900', 'bg-yellow-400', 'bg-white'],
+const womenHeroData = {
+  heroImage: '/assets/Hero/Rectangle 355.png',
+  heroAlt: 'Woman wearing a black and red shoulder bag',
+  collection: 'FOR HER',
 };
 
-// Tailwind class for the gold border line
-const goldBorder = 'border-t border-b border-yellow-800';
+// --- Product Categories Data ---
+const menCategories: CategoryData = {
+  categories: [
+    {
+      image: '/assets/Hero/IMG_5738 1.png',
+      alt: 'Premium leather wallet',
+      details: {
+        name: 'Leather Wallet',
+        mrp: '₹2,499',
+        colors: ['bg-black', 'bg-amber-800', 'bg-gray-800'],
+      },
+    },
+    {
+      image: '/assets/Hero/image 86.png',
+      alt: 'Genuine leather belt',
+      details: {
+        name: 'Leather Belt',
+        mrp: '₹1,899',
+        colors: ['bg-black', 'bg-amber-900', 'bg-gray-700'],
+      },
+    },
+    {
+      image: '/assets/Hero/image 85.png',
+      alt: 'Formal leather shoes',
+      details: {
+        name: 'Formal Shoes',
+        mrp: '₹8,999',
+        colors: ['bg-black', 'bg-amber-800', 'bg-gray-900'],
+      },
+    },
+    {
+      image: '/assets/Hero/image 83.png',
+      alt: 'Luxury wrist watch',
+      details: {
+        name: 'Gloves',
+        mrp: '₹15,999',
+        colors: ['bg-black', 'bg-yellow-600', 'bg-gray-400'],
+      },
+    },
+  ],
+};
+
+const womenCategories: CategoryData = {
+  categories: [
+    {
+      image: '/assets/Hero/IMG_5545 1.png',
+      alt: 'Elegant sling bag',
+      details: {
+        name: 'Sling Bag',
+        mrp: '₹3,499',
+        colors: ['bg-black', 'bg-pink-400', 'bg-red-600'],
+      },
+    },
+    {
+      image: '/assets/Hero/Component 24.png',
+      alt: 'Travel duffle bag',
+      details: {
+        name: 'Duffle Bag',
+        mrp: '₹4,999',
+        colors: ['bg-black', 'bg-purple-600', 'bg-blue-600'],
+      },
+    },
+    {
+      image: '/assets/Hero/ANI01001 1.png',
+      alt: 'Premium suitcase',
+      details: {
+        name: 'Steamer Carryon',
+        mrp: '₹31,000',
+        colors: ['bg-red-900', 'bg-yellow-400', 'bg-white'],
+      },
+    },
+    {
+      image: '/assets/Hero/image 81.png',
+      alt: 'Jackets',
+      details: {
+        name: 'Jackets',
+        mrp: '₹6,999',
+        colors: ['bg-black', 'bg-green-300', 'bg-blue-400'],
+      },
+    },
+  ],
+};
 
 // --- Component ---
 
-const BestSellerSectionStatic: React.FC = () => {
+const BestSellerSection: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'MEN' | 'WOMEN'>('MEN');
+
+  // Get current categories based on active tab
+  const activeCategories = activeTab === 'MEN' ? menCategories.categories : womenCategories.categories;
+
+  // Tailwind class for the gold border line
+  const goldBorder = 'border-t border-b border-yellow-800';
+  const tabStyles = (tab: 'MEN' | 'WOMEN') => 
+    `text-lg font-medium cursor-pointer transition-colors duration-300 ${
+      activeTab === tab 
+        ? 'text-yellow-600 border-b-2 border-yellow-600' 
+        : 'text-white/60 hover:text-white'
+    } pb-1 px-4`;
+
   return (
     <section className="bg-black py-16 text-white font-serif">
       <div className="max-w-7xl mx-auto px-4">
         
-        {/* --- Top Section: FOR HIM / FOR HER --- */}
+        {/* --- Top Section: FOR HIM / FOR HER (Static) --- */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
-          
-          {/* Left Card: FOR HIM */}
+          {/* Card 1: FOR HIM (Always shows men's hero image) */}
           <div className="relative aspect-[4/3] overflow-hidden">
             <Image
-              // public\assets\Hero\Rectangle 634.png
-              src="/assets/Hero/Rectangle 634.png"
-              alt="Man wearing a black leather backpack in a forest"
+              src={menHeroData.heroImage}
+              alt={menHeroData.heroAlt}
               layout="fill"
               objectFit="cover"
               className="brightness-90"
@@ -48,31 +152,30 @@ const BestSellerSectionStatic: React.FC = () => {
             />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               <span className="text-4xl font-light tracking-wider text-white">
-                FOR HIM
+                {menHeroData.collection}
               </span>
             </div>
           </div>
           
-          {/* Right Card: FOR HER */}
+          {/* Card 2: FOR HER (Always shows women's hero image) */}
           <div className="relative aspect-[4/3] overflow-hidden">
-             <Image
-              // public\assets\Hero\Rectangle 355.png
-              src="/assets/Hero/Rectangle 355.png"
-              alt="Woman wearing a black and red shoulder bag"
+            <Image
+              src={womenHeroData.heroImage}
+              alt={womenHeroData.heroAlt}
               layout="fill"
               objectFit="cover"
               className="brightness-90"
               priority={true}
             />
-             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               <span className="text-4xl font-light tracking-wider text-white">
-                FOR HER
+                {womenHeroData.collection}
               </span>
             </div>
           </div>
         </div>
 
-        {/* --- Center Section: OUR BEST SELLER & Tabs (Static) --- */}
+        {/* --- Center Section: OUR BEST SELLER & Tabs --- */}
         <div className="flex flex-col items-center">
           <p className="text-sm tracking-widest text-white/80 uppercase mb-4">
             OUR BEST SELLER
@@ -80,62 +183,60 @@ const BestSellerSectionStatic: React.FC = () => {
           
           <div className={`w-full ${goldBorder}`}>
             <div className="flex justify-center space-x-8 py-3">
-              {/* Static tab display */}
-              <span className="text-lg font-medium text-yellow-600 border-b-2 border-yellow-600 pb-1 px-4">
+              <span 
+                className={tabStyles('MEN')} 
+                onClick={() => setActiveTab('MEN')}
+              >
                 MEN
               </span>
-              <span className="text-lg font-medium text-white/60 pb-1 px-4">
+              <span 
+                className={tabStyles('WOMEN')} 
+                onClick={() => setActiveTab('WOMEN')}
+              >
                 WOMEN
               </span>
             </div>
           </div>
         </div>
 
-        {/* --- Bottom Section: Single Featured Image with overlaid text details --- */}
-        <div className="mt-10 relative">
-          
-          {/* Single Rectangular Image */}
-          <div className="relative w-full aspect-[2/1] md:aspect-[3/1] overflow-hidden">
-             <Image
-                // E:\six.ind\Projects\jail\public\assets\Hero\image 371.png
-                src="/assets/Hero/image 371.png"
-                alt="Leather watch case and steamer carryon suitcase"
-                layout="fill"
-                objectFit="cover"
-                priority={false} 
-              />
-          </div>
-          
-          {/* Product Details Overlay (Positioned to match the image layout) */}
-          <div className="grid grid-cols-2 gap-8 absolute inset-0 pt-20 md:pt-48 pb-0 md:pb-4 text-center">
-            
-            {/* Left Product Details */}
-            <div className="flex flex-col items-center justify-end">
-              <p className="text-lg font-normal">{productLeft.name}</p>
-              <p className="text-sm text-gray-400">MRP {productLeft.mrp}</p>
-              <div className="flex justify-center space-x-2 mt-2">
-                {productLeft.colors.map((colorClass, index) => (
-                  <div key={index} className={`w-3 h-3 rounded-full ${colorClass} border border-gray-600`}></div>
-                ))}
+        {/* --- Bottom Section: Product Categories (Dynamic based on tab) --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+          {activeCategories.map((category, index) => (
+            <div key={`${activeTab}-${index}`} className="relative flex flex-col items-center group cursor-pointer">
+              <div className="relative w-full aspect-square overflow-hidden rounded-lg transition-transform duration-300 group-hover:scale-105">
+                <Image
+                  src={category.image}
+                  alt={category.alt}
+                  layout="fill"
+                  objectFit="cover"
+                  className="transition-brightness duration-300 group-hover:brightness-110"
+                  priority={index < 2} // Prioritize loading first 2 images
+                />
+              </div>
+              <div className="text-center mt-4">
+                <p className="text-lg font-normal transition-colors duration-300 group-hover:text-yellow-400">
+                  {category.details.name}
+                </p>
+                <p className="text-sm text-gray-400">MRP {category.details.mrp}</p>
+                <div className="flex justify-center space-x-2 mt-2">
+                  {category.details.colors.map((colorClass, colorIndex) => (
+                    <div 
+                      key={colorIndex} 
+                      className={`w-3 h-3 rounded-full ${colorClass} border border-gray-600 transition-transform duration-300 hover:scale-125`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
-
-            {/* Right Product Details */}
-            <div className="flex flex-col items-center justify-end">
-              <p className="text-lg font-normal">{productRight.name}</p>
-              <p className="text-sm text-gray-400">MRP {productRight.mrp}</p>
-              <div className="flex justify-center space-x-2 mt-2">
-                {productRight.colors.map((colorClass, index) => (
-                  <div key={index} className={`w-3 h-3 rounded-full ${colorClass} border border-gray-600`}></div>
-                ))}
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* --- Bottom Link --- */}
         <div className="text-center mt-12">
-          <a href="#" className="text-sm tracking-widest text-white/70 hover:text-white transition-colors duration-200 border-b border-white/70 pb-1">
+          <a 
+            href="#" 
+            className="text-sm tracking-widest text-white/70 hover:text-yellow-400 transition-colors duration-200 border-b border-white/70 hover:border-yellow-400 pb-1"
+          >
             EXPLORE BEST SELLERS
           </a>
         </div>
@@ -145,4 +246,4 @@ const BestSellerSectionStatic: React.FC = () => {
   );
 };
 
-export default BestSellerSectionStatic;
+export default BestSellerSection;
