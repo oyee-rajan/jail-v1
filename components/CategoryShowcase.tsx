@@ -140,7 +140,7 @@ const CategoryShowcase: React.FC = () => {
       })}
 
       
-      <div className="relative w-full aspect-[2.5/1] overflow-hidden mb-10">
+      <div className="relative  aspect-[2.5/1] overflow-hidden mb-10 a  h-[733px] w-full ">
         <Image
          
           src="/assets/Hero/Rectangle 356.png"
@@ -151,59 +151,7 @@ const CategoryShowcase: React.FC = () => {
         />
       </div>
 
-       <section className="relative w-[1227px] h-[616px] py-16 sm:py-24 md:py-32 left-1 mb-6 gap-6">
-        {/* Background Image Container */}
-        <div className="absolute inset-0 z-0">
-          <Image
-           
-            src="/assets/Hero/Rectangle 635.png"
-            alt="Light textured background"
-            layout="fill"
-            objectFit="cover"
-            priority={false}
-            className="opacity-70" // Slightly fade the background image
-          />
-        </div>
-        
       
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white/5 md:bg-transparent rounded-lg p-6 ">
-          <h2 className="text-center text-4xl font-normal tracking-widest text-yellow-800 mb-12 uppercase">
-            JAIL LUXURY
-          </h2>
-
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-8 items-start">
-            
-           
-            <div className="relative w-full aspect-[4/3] md:aspect-auto overflow-hidden rounded-lg shadow-xl">
-             <Image
-               
-                src="/assets/Hero/girimage.png" 
-                alt="Woman modeling a leather jacket"
-                layout="fill"
-                objectFit="cover"
-                priority={false}
-                className="rounded-lg z-1"
-              />
-            </div>
-
-            
-            <div className="bg-white p-6 sm:p-8 rounded-lg shadow-2xl">
-              <h3 className="text-3xl font-light text-black mb-6">
-                Why jail ?
-              </h3>
-              <p className="text-base text-gray-700 leading-relaxed">
-                The name **"Jail" is more than just a brand**. It's a nod to our
-                roots. The original shop was located on Jail Road in Banka, and the name
-                was born out of the simplicity of direction "Jail
-                Road, Jail Road." Today, it stands as a symbol of
-                our journey, from a small shop in Bihar to a
-                **luxury brand** that resonates with customers
-                around the world.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
       
     </div>
   );

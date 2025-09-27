@@ -31,7 +31,7 @@ const Naavbar: React.FC = () => {
           {/* Use the public path for the image. In Next.js, images in 'public' 
               can be accessed from the root, like '/assets/...' */}
           <Image 
-            src="/assets/navbar/image 93.jpg" // Adjust path if necessary
+            src="/assets/navbar/jail.png" // Adjust path if necessary
             alt="ALIBI Logo" 
             // ESTIMATED DIMENSIONS: Adjust these values to match the actual logo size
             width={120} 
