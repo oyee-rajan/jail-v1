@@ -1,8 +1,14 @@
+"use client";
+
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 // Import icons from a library like react-icons for a polished look
 import { FiSearch, FiShoppingCart, FiUser, FiMenu } from 'react-icons/fi';
 import { GoHeart } from "react-icons/go";
+import { useCart } from '../contexts/CartContext';
+import { useWishlist } from '../contexts/WishlistContext';
+import ThemeToggle from './ThemeToggle';
 
 // Define the type for a navigation link for better type safety
 interface NavItem {
@@ -11,6 +17,9 @@ interface NavItem {
 }
 
 const Naavbar: React.FC = () => {
+  const { state, toggleCart } = useCart();
+  const { state: wishlistState, toggleWishlist } = useWishlist();
+  
   // Define the main navigation links
   const menuItems: NavItem[] = [
     { name: 'CLOTHING', href: '/clothing' },
@@ -23,22 +32,24 @@ const Naavbar: React.FC = () => {
 
   return (
     // Main Navbar container: full width, dark background matching the image, flex for alignment
-    <nav className="bg-neutral-900 text-white p-4 sticky top-0 z-50 shadow-lg">
+    <nav className="bg-neutral-900 dark:bg-black text-white p-4 sticky top-0 z-50 shadow-lg transition-colors duration-300">
       <div className="max-w-7xl mx-auto flex justify-between items-center h-12">
         
         {/* 1. Logo Section (Left Aligned) */}
         <div className="flex-shrink-0">
           {/* Use the public path for the image. In Next.js, images in 'public' 
               can be accessed from the root, like '/assets/...' */}
-          <Image 
-            src="/assets/navbar/jail.png" // Adjust path if necessary
-            alt="ALIBI Logo" 
-            // ESTIMATED DIMENSIONS: Adjust these values to match the actual logo size
-            width={120} 
-            height={40} 
-            // Tailwind classes for size and object fit
-            className="h-8 md:h-10 cursor-pointer object-contain" 
-          />
+          <Link href="/" className="cursor-pointer">
+            <Image 
+              src="/assets/navbar/jail.png" // Adjust path if necessary
+              alt="ALIBI Logo" 
+              // ESTIMATED DIMENSIONS: Adjust these values to match the actual logo size
+              width={120} 
+              height={40} 
+              // Tailwind classes for size and object fit
+              className="h-8 md:h-10 object-contain hover:opacity-80 transition-opacity duration-200" 
+            />
+          </Link>
         
         </div>
 
@@ -87,16 +98,36 @@ const Naavbar: React.FC = () => {
             <FiSearch />
           </button>
           
+          <ThemeToggle />
+          
           <button title="Account" className="text-xl  hover:text-gray-300 active:text-gray-100  transition duration-300">
             <FiUser />
           </button>
 
-             <button title="Account" className="text-xl  hover:text-gray-300 active:text-gray-100  transition duration-300">
+             <button 
+            title="Wishlist" 
+            onClick={toggleWishlist}
+            className="text-xl hover:text-gray-300 active:text-gray-100 transition duration-300 relative"
+          >
             <GoHeart />
+            {wishlistState.totalItems > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {wishlistState.totalItems}
+              </span>
+            )}
           </button>
           
-          <button title="Shopping Cart" className="text-xl  hover:text-gray-300 active:text-gray-100  transition duration-300">
+          <button 
+            title="Shopping Cart" 
+            onClick={toggleCart}
+            className="text-xl hover:text-gray-300 active:text-gray-100 transition duration-300 relative"
+          >
             <FiShoppingCart />
+            {state.totalItems > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                {state.totalItems}
+              </span>
+            )}
           </button>
           </div>
          

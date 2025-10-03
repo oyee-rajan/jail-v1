@@ -82,7 +82,7 @@ const ChevronDownIcon: React.FC<{ open: boolean }> = ({ open }) => (
 );
 
 // --- Mock Data (to be replaced by API calls) ---
-const productData: ProductData = {
+const product: ProductData = {
     name: 'Premium Leather Wallet',
     rating: 4.5,
     reviewCount: 213,
@@ -297,19 +297,44 @@ const CustomerReviewsSection: React.FC = () => {
 
 
 // --- Main Product Page Component ---
-export default function App() {
-    const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
-    const [selectedColor, setSelectedColor] = useState<Color>(productData.colors[1]); // Default to black
+interface Product {
+    id: string | number;
+    name: string;
+    price: number;
+    imageUrl: string;
+    description?: string;
+    colors?: Array<{ name: string; hex: string }>;
+    inStock?: boolean;
+}
 
+interface ProductMainProps {
+    product?: Product;
+}
+
+export default function App({ product }: ProductMainProps) {
+    if (!product) {
+        return <div>Product not found</div>;
+    }
+
+    const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+    const [selectedColor, setSelectedColor] = useState<Color>(
+        product.colors?.[0] 
+            ? { name: product.colors[0].name, hex: product.colors[0].hex, className: `bg-${product.colors[0].name.toLowerCase()}` }
+            : { name: 'Black', hex: '#000000', className: 'bg-black' }
+    ); // Default to first color or black
+
+    // Create a simple images array from the single imageUrl
+    const images = [product.imageUrl];
+    
     const handlePrevImage = (): void => {
         setCurrentImageIndex((prevIndex) =>
-            prevIndex === 0 ? productData.images.length - 1 : prevIndex - 1
+            prevIndex === 0 ? images.length - 1 : prevIndex - 1
         );
     };
 
     const handleNextImage = (): void => {
         setCurrentImageIndex((prevIndex) =>
-            prevIndex === productData.images.length - 1 ? 0 : prevIndex + 1
+            prevIndex === images.length - 1 ? 0 : prevIndex + 1
         );
     };
 
@@ -322,7 +347,7 @@ export default function App() {
                 <div className="flex flex-col items-center">
                     <div className="relative w-full aspect-square max-w-md">
                         <img
-                            src={productData.images[currentImageIndex]}
+                            src={images[currentImageIndex]}
                             alt={`Premium Leather Wallet - View ${currentImageIndex + 1}`}
                             className="w-full h-full object-cover rounded-3xl shadow-sm"
                         />
@@ -339,27 +364,27 @@ export default function App() {
 
                 {/* Product Details */}
                 <div>
-                    <h1 className="text-3xl lg:text-4xl font-bold text-gray-800">{productData.name}</h1>
+                    <h1 className="text-3xl lg:text-4xl font-bold text-gray-800">{product.name}</h1>
                     
                     <div className="flex items-center mt-2">
                         <div className="flex">
                             {[...Array(5)].map((_, i) => (
-                                <StarIcon key={i} filled={i < Math.floor(productData.rating)} />
+                                <StarIcon key={i} filled={i < 4} />
                             ))}
                         </div>
-                        <span className="text-gray-600 ml-2 text-sm">{productData.reviewCount} reviews</span>
+                        <span className="text-gray-600 ml-2 text-sm">24 reviews</span>
                     </div>
 
                     <p className="text-sm text-gray-500 mt-4">
-                        Expected delivery between <span className="font-medium text-gray-700">{productData.delivery.start}</span> - <span className="font-medium text-gray-700">{productData.delivery.end}</span>
+                        Expected delivery between <span className="font-medium text-gray-700">3-5</span> - <span className="font-medium text-gray-700">7 business days</span>
                     </p>
 
-                    <p className="text-4xl lg:text-5xl font-extrabold text-gray-900 mt-4">₹{productData.price.toLocaleString('en-IN')}</p>
+                    <p className="text-4xl lg:text-5xl font-extrabold text-gray-900 mt-4">₹{product.price.toLocaleString('en-IN')}</p>
 
                     <div className="mt-6">
                         <h3 className="text-sm font-medium text-gray-900">Color: <span className="font-normal text-gray-600">{selectedColor.name}</span></h3>
                         <div className="flex items-center space-x-3 mt-2">
-                            {productData.colors.map((color) => (
+                            {product.colors.map((color) => (
                                 <button
                                     key={color.name}
                                     onClick={() => setSelectedColor(color)}
@@ -373,12 +398,14 @@ export default function App() {
                     <div className="mt-8 p-4 bg-gray-50 rounded-lg">
                         <h3 className="font-semibold text-gray-800">Personalize your Luxury</h3>
                         <div className="space-y-3 mt-3">
-                            {productData.personalizationOptions.map((option) => (
-                                <label key={option.id} className="flex items-center text-sm text-gray-600">
-                                    <input type="checkbox" className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
-                                    <span className="ml-3">{option.label} (+₹{option.price})</span>
-                                </label>
-                            ))}
+                            <label className="flex items-center text-sm text-gray-600">
+                                <input type="checkbox" className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+                                <span className="ml-3">Add Personalized Engraving (+₹600)</span>
+                            </label>
+                            <label className="flex items-center text-sm text-gray-600">
+                                <input type="checkbox" className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" />
+                                <span className="ml-3">Custom Color Option (+₹500)</span>
+                            </label>
                         </div>
                     </div>
                     
@@ -392,13 +419,13 @@ export default function App() {
 
                     <div className="mt-8">
                         <AccordionItem title="Description">
-                            {productData.description}
+                            {product.description}
                         </AccordionItem>
                         <AccordionItem title="Warranty & Return">
-                            {productData.warranty}
+                            {product.warranty}
                         </AccordionItem>
                         <AccordionItem title="More Information">
-                           {productData.moreInfo}
+                           {product.moreInfo}
                         </AccordionItem>
                     </div>
 

@@ -87,7 +87,7 @@ const sectionsData: CategorySection[] = [
 
 const CategoryShowcase: React.FC = () => {
   return (
-    <div className="bg-black text-white font-serif">
+    <div className="bg-black dark:bg-gray-900 text-white font-serif transition-colors duration-300">
       {sectionsData.map((section, index) => {
        
         const imageFirst = section.layout === 'imageLeft';

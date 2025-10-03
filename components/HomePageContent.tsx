@@ -11,7 +11,7 @@ import Jailfooter from "./Jailfooter";
 
 const HomePageContent: React.FC = () => {
   return (
-    <div className="bg-neutral-800 text-white min-h-screen">
+    <div className="bg-white dark:bg-black text-black dark:text-white min-h-screen transition-colors duration-300">
       {/* Hero Section - ALIBI Banner */}
       {/* Hero Section - ALIBI Banner */}
       <div className="relative w-full h-[500px] mb-8">
