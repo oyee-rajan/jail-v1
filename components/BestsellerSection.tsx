@@ -42,7 +42,7 @@ const womenHeroData = {
 const menCategories: CategoryData = {
   categories: [
     {
-      image: "assets/hero/leather.png",
+      image: "assets/hero/IMG_5738 1.png",
       alt: "Premium leather wallet",
       details: {
         name: "Leather Wallet",
@@ -51,7 +51,7 @@ const menCategories: CategoryData = {
       },
     },
     {
-      image: "https://placehold.co/400x400/3d3d3d/FFFFFF?text=Belt",
+      image: "assets/hero/image 86.png",
       alt: "Genuine leather belt",
       details: {
         name: "Leather Belt",
@@ -60,7 +60,7 @@ const menCategories: CategoryData = {
       },
     },
     {
-      image: "https://placehold.co/400x400/3d3d3d/FFFFFF?text=Shoes",
+      image: "assets/hero/image 85.png",
       alt: "Formal leather shoes",
       details: {
         name: "Formal Shoes",
@@ -69,7 +69,7 @@ const menCategories: CategoryData = {
       },
     },
     {
-      image: "https://placehold.co/400x400/3d3d3d/FFFFFF?text=Gloves",
+      image: "assets/hero/image 83.png",
       alt: "Luxury wrist watch",
       details: {
         name: "Gloves",
@@ -264,7 +264,7 @@ const BestSellerSection: React.FC = () => {
         {/* --- Bottom Link --- */}
         <div className="text-center mt-12">
           <a
-            href="#"
+            href="/products?bestsellers=true"
             className="text-sm tracking-widest text-white/70 hover:text-yellow-400 transition-colors duration-200 border-b border-white/70 hover:border-yellow-400 pb-1"
           >
             EXPLORE BEST SELLERS

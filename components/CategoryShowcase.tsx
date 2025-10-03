@@ -15,7 +15,7 @@ const sectionsData: CategorySection[] = [
     id: 1,
     title: 'DUFFLE BAGS',
   
-    imageUrl: '/assets/Hero/Component 24.png',
+    imageUrl: '/assets/Hero/duffle.png',
     imageAlt: 'Pair of brown leather shoes',
     layout: 'imageLeft',
   },
@@ -24,7 +24,7 @@ const sectionsData: CategorySection[] = [
     id: 2,
     title: 'SLING BAGS',
     
-    imageUrl: '/assets/Hero/IMG_5545 1.png',
+    imageUrl: '/assets/Hero/leather.png',
     imageAlt: 'Red duffle bag floating in a desert scene',
     layout: 'imageRight',
   },

@@ -18,7 +18,7 @@ const HomePageContent: React.FC = () => {
         {/* CORRECTED SRC PATH: /assets/Hero/herobanner.png */}
 
         <Image
-          src="/assets/Hero/herobanner.png"
+          src="/assets/Hero/ANI053311.png"
           alt="Quality Leather Goods Hero Banner"
           fill
           priority
@@ -28,11 +28,8 @@ const HomePageContent: React.FC = () => {
 
         <div></div>
         <button className=" cursor-pointer absolute bg-gray-400 w-[245px] h-11 top-[452px] bottom-4 left-1/2 rounded-md z-2 -translate-x-1/2">
-          View Collecton
+          View Collection
         </button>
-        <h2 className="absolute top-[500px] left-1/2 -translate-x-1/2 font-light text-[20px] leading-[120%] tracking-[0.14em] w-[203px] h-[24px] opacity-100 z-20 text-white">
-          From our gallery
-        </h2>
       </div>
       <div>
         <ImageSlider />
@@ -40,7 +37,7 @@ const HomePageContent: React.FC = () => {
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-12 ">
         <div className=" flex gap-3 mb-16 justify-center">
           {/* FIRST CARD: DUFFLE (Top/Bottom Positioning) */}
-          <div className="w-[670px] h-[455px] bg-[url('/assets/Hero/Component%2024.png')] bg-cover bg-no-repeat opacity-100 p-10">
+          <div className="w-[670px] h-[455px] bg-[url('/assets/Hero/duffle.png')] bg-cover bg-no-repeat opacity-100 p-10">
             <div className="flex flex-col items-center justify-between h-full text-white">
               {/* TOP CONTENT (Title & Slogan) */}
               <div className="flex flex-col items-center">
@@ -108,10 +105,9 @@ const HomePageContent: React.FC = () => {
       </div>
       {/* Footer Section */}
       <div>
-        <Jailfooter/>
+        <Jailfooter />
       </div>
     </div>
-
   );
 };
 

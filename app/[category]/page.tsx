@@ -1,17 +1,20 @@
-import Naavbar from '@/components/Naavbar'
-import ProductMain from '@/components/product/productmain'
-import ProductListingPage from '@/components/product/productview'
-import React from 'react'
+import Naavbar from "@/components/Naavbar";
+import ProductListingPage from "@/components/product/productview";
+import React from "react";
 
-const Productviews = () => {
+type PageProps = {
+  params: { category: string };
+};
+
+const Productviews = ({ params }: PageProps) => {
+  const { category } = params;
+
   return (
     <div>
-        <Naavbar/>
-        <ProductListingPage/>
-
-        
+      <Naavbar />
+      <ProductListingPage category={category} />
     </div>
-  )
-}
+  );
+};
 
 export default Productviews;
